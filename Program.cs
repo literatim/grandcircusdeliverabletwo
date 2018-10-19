@@ -4,6 +4,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,16 +38,17 @@ namespace deliverable_two
         /// <returns></returns>
         private static DateTime GetDateTime(string date)
         {
+            DateTime dateTime = DateTime.Now;
             string [] formats = { "MMddyyyy HH:mm" };
-            DateTime dateTime;
+            System.ArgumentException argE = new System.ArgumentException("That's not a valid date!");
             try
             {
                 dateTime = DateTime.Parse(date);
+               
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-               System.ArgumentException argE = new System.ArgumentException("That's not a valid date!");
-               throw argE;
+                Console.WriteLine($"That's not a valid date! {ex.Message}");
             }
 
             return dateTime;
